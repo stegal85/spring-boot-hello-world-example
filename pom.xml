@@ -48,28 +48,43 @@
 		</dependency>
 	</dependencies>
 
+	<!-- >build> <plugins> <plugin> <groupId>org.springframework.boot</groupId> 
+		<artifactId>spring-boot-maven-plugin</artifactId> </plugin> </plugins> </build -->
+
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>
+										com.javatpoint.SpringBootHelloWorldExampleApplication
+									</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 	<repositories>
-		
-		<repository>
-			<id>app-feed-master</id>
-			<url>https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		
+
+		<!-- repository> <id>app-feed-master</id> <url>https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1</url> 
+			<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
+			</snapshots> </repository> -->
+
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
