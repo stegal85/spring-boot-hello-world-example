@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.2.BUILD-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.javatpoint</groupId>
 	<artifactId>spring-boot-hello-world-example</artifactId>
@@ -21,18 +22,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-	</dependency>
-		
-		  <dependency>
- <groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.2.1.RELEASE</version>
-<type>pom</type>
-</dependency>
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-web</artifactId>
-</dependency>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-parent</artifactId>
+			<version>2.2.1.RELEASE</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +58,18 @@
 	</build>
 
 	<repositories>
+		
+		<repository>
+			<id>app-feed-master</id>
+			<url>https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
