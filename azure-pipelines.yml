@@ -13,13 +13,15 @@ steps:
 - task: MavenAuthenticate@0
   inputs:
     artifactsFeeds: 'app-feed-master'
-- script:
-      az artifacts universal publish
-        --organization https://dev.azure.com/stefanogalgani/
-        --project="school Management System"
-        --scope project
-        --feed app-feed-master
-        --name my-first-package
-        --version 0.0.1
-        --description "Welcome to Universal Packages"
-        --path .
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx2048m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    mavenAuthenticateFeed: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+    options: '-DgroupId="com.javatpoint" -Dversion="0.0.1" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-0.0.1-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"'
