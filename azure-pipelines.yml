@@ -5,6 +5,11 @@
 
 trigger: none
 
+variables:
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: -DgroupId="com.javatpoint" -Dversion="0.0.1" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-0.0.1-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"
 
 pool:
   vmImage: ubuntu-latest
