@@ -6,7 +6,7 @@
     <server>
       <id>app-feed-master</id>
       <username>stefanogalgani</username>
-      <password>xxx</password>
+      <password>$(env.system.access.token)</password>
     </server>
   </servers>
 </settings>
