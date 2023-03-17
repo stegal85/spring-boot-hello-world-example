@@ -10,6 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: echo token  $(env.system.access.token)
 - task: MavenAuthenticate@0
   inputs:
     artifactsFeeds: 'app-feed-master'
