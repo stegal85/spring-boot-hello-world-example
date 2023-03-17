@@ -13,14 +13,13 @@ steps:
 - task: MavenAuthenticate@0
   inputs:
     artifactsFeeds: 'app-feed-master'
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx2048m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    mavenAuthenticateFeed: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+- script:
+      az artifacts universal publish
+        --organization https://dev.azure.com/stefanogalgani/
+        --project="school Management System"
+        --scope project
+        --feed app-feed-master
+        --name my-first-package
+        --version 0.0.1
+        --description "Welcome to Universal Packages"
+        --path .
