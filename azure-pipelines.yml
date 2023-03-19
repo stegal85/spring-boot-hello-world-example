@@ -3,6 +3,14 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+resources:
+  repositories:
+  - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: https://github.com/
+    name: stegal85/spring-boot-hello-world-example
+    ref: develop
+
 trigger: none
 
 variables:
@@ -15,35 +23,38 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo token  $(env.system.access.token)
-- task: MavenAuthenticate@0
-  inputs:
-    artifactsFeeds: 'app-feed-master'
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'package deploy'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
-    mavenAuthenticateFeed: false
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+- checkout: MyGitHubRepo
+
+- script: ls $(Build.SourcesDirectory)
+#- script: echo token  $(env.system.access.token)
+#- task: MavenAuthenticate@0
+#  inputs:
+#    artifactsFeeds: 'app-feed-master'
+#- task: Maven@3
+#  inputs:
+#    mavenPomFile: 'pom.xml'
+#    goals: 'package deploy'
+#    publishJUnitResults: true
+#    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+#    javaHomeOption: 'JDKVersion'
+#    mavenVersionOption: 'Default'
+#    mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
+#    mavenAuthenticateFeed: false
+#    jdkVersionOption: '1.8'
+#    jdkArchitectureOption: 'x64'
+#    effectivePomSkip: false
+#    sonarQubeRunAnalysis: false
     
 - script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory)
-- task: CopyFiles@2
-  inputs:
-    Contents: '**/target/*.jar'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    CleanTargetFolder: true
-    flattenFolders: true
+#- task: CopyFiles@2
+#  inputs:
+#    Contents: '**/target/*.jar'
+#    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+#    CleanTargetFolder: true
+#    flattenFolders: true
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'Test'
-    publishLocation: 'Container'
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#    ArtifactName: 'Test'
+#    publishLocation: 'Container'
