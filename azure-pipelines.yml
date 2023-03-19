@@ -7,7 +7,7 @@ resources:
   repositories:
   - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
     type: github
-    endpoint: https://github.com/
+    endpoint: github.com_stegal85
     name: stegal85/spring-boot-hello-world-example
     ref: develop
 
