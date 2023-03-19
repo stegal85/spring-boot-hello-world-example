@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.javatpoint</groupId>
 	<artifactId>spring-boot-hello-world-example</artifactId>
-	<version>0.0.10</version>
+	<version>0.0.11</version>
 	<name>spring-boot-hello-world-example</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -80,7 +80,7 @@
 		</plugins>
 	</build>
 
-	<!--distributionManagement>
+	<distributionManagement>
 	
 		<repository>
 			<id>app-feed-master</id>
@@ -92,7 +92,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-	</distributionManagement-->
+	</distributionManagement>
 
 	<repositories>
 
