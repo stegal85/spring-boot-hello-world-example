@@ -1,0 +1,49 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger: none
+
+variables:
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: -DgroupId="com.javatpoint" -Dversion="${project.version}" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-${project.version}-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo token  $(env.system.access.token)
+- task: MavenAuthenticate@0
+  inputs:
+    artifactsFeeds: 'app-feed-master'
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'package deploy'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
+    mavenAuthenticateFeed: false
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+    
+- script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory)
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/target/*.jar'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    flattenFolders: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'Test'
+    publishLocation: 'Container'
