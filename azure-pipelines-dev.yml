@@ -3,21 +3,29 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+variables:
+  - group: app-dev
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: -DgroupId="com.javatpoint" -Dversion="${project.version}" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-${project.version}-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"
+
 resources:
   repositories:
   - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
     type: github
     endpoint: github.com_stegal85
     name: stegal85/spring-boot-hello-world-example
-    ref: develop
+    ref: ${barnchName}
 
 trigger: none
 
-variables:
-  - name: MAVEN_CACHE_FOLDER
-    value: $(Pipeline.Workspace)/.m2/repository
-  - name: MAVEN_OPTS
-    value: -DgroupId="com.javatpoint" -Dversion="${project.version}" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-${project.version}-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"
+#variables:
+#  - group: app-dev
+#  - name: MAVEN_CACHE_FOLDER
+#    value: $(Pipeline.Workspace)/.m2/repository
+ # - name: MAVEN_OPTS
+#    value: -DgroupId="com.javatpoint" -Dversion="${project.version}" -Dpackaging=jar -Dfile="spring-boot-hello-world-example-${project.version}-jar-with-dependencies.jar" -DgeneratePom="true" -DrepositoryId="app-feed-master" -Durl="https://pkgs.dev.azure.com/stefanogalgani/898d63e2-55fd-4f76-9864-0bb54f78b6ad/_packaging/app-feed-master/maven/v1"
 
 pool:
   vmImage: ubuntu-latest
