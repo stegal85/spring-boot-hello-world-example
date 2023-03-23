@@ -16,7 +16,7 @@ resources:
     type: github
     endpoint: github.com_stegal85
     name: stegal85/spring-boot-hello-world-example
-    ref: $(branchName)
+    ref: develop
 
 trigger: none
 
@@ -53,7 +53,7 @@ steps:
 #    effectivePomSkip: false
 #    sonarQubeRunAnalysis: false
     
-- script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory)
+- script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory) $(branchName)
 #- task: CopyFiles@2
 #  inputs:
 #    Contents: '**/target/*.jar'
