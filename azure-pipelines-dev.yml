@@ -40,26 +40,28 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'package'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
-    mavenAuthenticateFeed: false
+    #publishJUnitResults: true
+    #testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    #javaHomeOption: 'JDKVersion'
+    #mavenVersionOption: 'Default'
+    #mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
+    #mavenAuthenticateFeed: false
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    #effectivePomSkip: false
+    #sonarQubeRunAnalysis: false
     
 - script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory) $(branchName)
 - script: ls $(Build.ArtifactStagingDirectory)
-#- task: CopyFiles@2
-#  inputs:
-#    Contents: '**/target/*.jar'
-#    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-#    CleanTargetFolder: true
-#    flattenFolders: true
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/target/*.jar' 
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: false
+    flattenFolders: false
 
+- script:
+    ls $(Build.ArtifactStagingDirectory)
 #- task: PublishBuildArtifacts@1
 #  inputs:
 #    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
