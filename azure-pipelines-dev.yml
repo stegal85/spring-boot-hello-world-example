@@ -52,6 +52,7 @@ steps:
     sonarQubeRunAnalysis: false
     
 - script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory) $(branchName)
+- script: ls $(Build.ArtifactStagingDirectory)
 #- task: CopyFiles@2
 #  inputs:
 #    Contents: '**/target/*.jar'
