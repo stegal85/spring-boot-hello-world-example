@@ -67,3 +67,14 @@ steps:
 #    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 #    ArtifactName: 'Test'
 #    publishLocation: 'Container'
+- task: AzureWebAppContainer@1
+  inputs:
+     appName: spring-boot-hello-world-example
+     azureSubscription: '210c2cef-9b42-48e3-85d3-a0d1eb2a44c9'
+     imageName: mycontainerregistrysg.azurecr.io/spring-boot-hello-world-example:v1
+#- task: AzureWebAppContainer@1
+#    inputs: 
+#      appName: $(WebAppName)
+#      #azureSubscription: 'Resource Manager - Tailspin - Space Game'
+#      #imageName: $(RegistryName)/$(webRepository):$(build.buildId)
+      
