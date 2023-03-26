@@ -55,15 +55,13 @@ steps:
 - script: ls $(Build.ArtifactStagingDirectory)
 - task: CopyFiles@2
   inputs:
-    Contents: '**/target/*jar-with-dependencies.jar' 
+    Contents: '**/target/*.jar' 
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     CleanTargetFolder: false
     flattenFolders: true
 
 - script:
     ls $(Build.ArtifactStagingDirectory)
-- script:
-    ls $(Build.ArtifactStagingDirectory)/target
 #- task: PublishBuildArtifacts@1
 #  inputs:
 #    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
