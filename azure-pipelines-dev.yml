@@ -36,18 +36,18 @@ steps:
 - script: ls $(Build.SourcesDirectory)
 #- script: echo token  $(env.system.access.token)
 
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'package'
+#- task: Maven@3
+#  inputs:
+#    mavenPomFile: 'pom.xml'
+#    goals: 'package'
     #publishJUnitResults: true
     #testResultsFiles: '**/surefire-reports/TEST-*.xml'
     #javaHomeOption: 'JDKVersion'
     #mavenVersionOption: 'Default'
     #mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
     #mavenAuthenticateFeed: false
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
+#    jdkVersionOption: '1.8'
+#    jdkArchitectureOption: 'x64'
     #effectivePomSkip: false
     #sonarQubeRunAnalysis: false
     
