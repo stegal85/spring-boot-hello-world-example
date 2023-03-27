@@ -14,7 +14,7 @@ parameters:
   - name: branch
     displayName: branch name
     type: string
-    default: ''
+    default: 'develop'
 variables: 
   #- group: app-dev
   - group: ${{ parameters.libraryEnv }}
