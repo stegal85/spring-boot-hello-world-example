@@ -11,6 +11,10 @@ parameters:
     values:
       - 'app-dev'
       - 'app-prod'
+  - name: branch
+    displayName: branch name
+    type: string
+    default: ''
 variables: 
   #- group: app-dev
   - group: ${{ parameters.libraryEnv }}
