@@ -4,16 +4,16 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 parameters:
-  - name: buildTypeArtifact
-    displayName: Build type
-    default: snapshot
+  - name: libraryEnv
+    displayName: library env
+    default: app-dev
     type: string
     values:
-      - 'snapshot'
-      - 'release'
-variables:
-  - group: app-dev
-  - group: $(ENVRUN)
+      - 'app-dev'
+      - 'app-prod'
+variables: 
+  #- group: app-dev
+  - group: ${{ parameters.libraryEnv }}
   - name: MAVEN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.m2/repository
   - name: MAVEN_OPTS
