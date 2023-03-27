@@ -3,8 +3,16 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+parameters:
+  - name: buildTypeArtifact
+    displayName: Build type
+    default: snapshot
+    type: string
+    values:
+      - 'snapshot'
+      - 'release'
 variables:
-  #- group: app-dev
+  - group: app-dev
   - group: $(ENVRUN)
   - name: MAVEN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.m2/repository
