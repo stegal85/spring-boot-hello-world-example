@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 variables:
-  - group: app-dev
+  #- group: app-dev
+  - group: $(ENVRUN)
   - name: MAVEN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.m2/repository
   - name: MAVEN_OPTS
@@ -51,7 +52,7 @@ steps:
     #effectivePomSkip: false
     #sonarQubeRunAnalysis: false
     
-- script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory) $(branchName)
+- script: echo ArtifactStagingDirectory  $(Build.ArtifactStagingDirectory) $(branchName) - $(ENVRUN)
 - script: ls $(Build.ArtifactStagingDirectory)
 - task: CopyFiles@2
   inputs:
